@@ -1,6 +1,5 @@
 package api.sms.service;
 
-import api.sms.service.model.SimpayStatusType;
 import api.sms.service.response.SimpayResponse;
 
 import static java.util.Objects.nonNull;

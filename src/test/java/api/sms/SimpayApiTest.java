@@ -9,16 +9,11 @@ import static org.junit.Assert.assertEquals;
 public class SimpayApiTest {
 
     @Test
-    public void sdsfg() throws IOException {
-        SimpayApi simpayApi = new SimpayApi();
+    public void sampleTest() throws IOException {
+        SmsApi smsApi = new SmsApi();
 
+        smsApi.getStatus("", "", "");
 
-        simpayApi.getStatus("11", "11", "dd");
-
-
-
-        assertEquals(simpayApi, "");
-
+        assertEquals(smsApi, "");
     }
-
 }

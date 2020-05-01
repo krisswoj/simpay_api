@@ -1,4 +1,4 @@
-package api.sms.service;
+package api.sms.service.response;
 
 public enum SimpayStatusType {
     OK,

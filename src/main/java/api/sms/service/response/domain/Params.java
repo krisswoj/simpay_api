@@ -1,4 +1,4 @@
-package api.sms.service.response;
+package api.sms.service.response.domain;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package api.sms.service.response;
+package api.sms.service.response.domain;
 
 import java.util.List;
 

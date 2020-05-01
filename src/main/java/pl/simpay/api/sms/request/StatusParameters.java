@@ -1,9 +1,9 @@
-package api.sms.service.request;
+package pl.simpay.api.sms.request;
 
 import com.google.gson.annotations.SerializedName;
 
-import static config.ApiParameters.PARTNER_KEY;
-import static config.ApiParameters.PARTNER_SECRET;
+import static pl.simpay.api.config.ApiParameters.PARTNER_KEY;
+import static pl.simpay.api.config.ApiParameters.PARTNER_SECRET;
 
 public class StatusParameters {
 

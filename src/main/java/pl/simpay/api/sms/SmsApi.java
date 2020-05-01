@@ -1,16 +1,16 @@
-package api.sms;
+package pl.simpay.api.sms;
 
-import api.sms.service.request.StatusRequest;
-import api.sms.service.response.domain.SimpayResponse;
-import api.sms.service.util.GsonUtil;
+import pl.simpay.api.sms.request.StatusRequest;
+import pl.simpay.api.sms.response.domain.SimpayResponse;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static api.sms.service.util.GsonUtil.serializeToJson;
-import static config.ApiParameters.API_URL;
+import static pl.simpay.api.config.ApiParameters.API_URL;
+import static pl.simpay.api.sms.util.GsonUtil.convertSimpayResponse;
+import static pl.simpay.api.sms.util.GsonUtil.serializeToJson;
 
 public class SmsApi {
 
@@ -18,7 +18,7 @@ public class SmsApi {
         StatusRequest statusRequest = new StatusRequest(serviceId, number, code);
         InputStream inputStream = receiveInputStream(statusRequest);
 
-        return GsonUtil.convertSimpayResponse(inputStream);
+        return convertSimpayResponse(inputStream);
     }
 
     private InputStream receiveInputStream(StatusRequest statusRequest) throws IOException {

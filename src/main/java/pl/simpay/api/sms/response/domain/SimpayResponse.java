@@ -1,9 +1,9 @@
-package api.sms.service.response.domain;
-
-import java.util.List;
+package pl.simpay.api.sms.response.domain;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class SimpayResponse {
 

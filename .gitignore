@@ -1,41 +1,32 @@
-.idea/*
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
-# CMake
-cmake-build-*/
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# Mongo Explorer plugin
-.idea/**/mongoSettings.xml
-
-# File-based project format
+### IntelliJ IDEA ###
+.idea
 *.iws
-
-# IntelliJ
+*.iml
+*.ipr
 out/
 
-# mpeltonen/sbt-idea plugin
-.idea_modules/
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Cursive Clojure plugin
-.idea/replstate.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-
-# Editor-based Rest Client
-.idea/httpRequests
-
-# ========== PROJECT SPECIFIC ==========
-.gradle
-gradle.properties
-/build/
-/out/
-.DS_Store
-
-# Git Properties
-/src/main/resources/git.properties
+### VS Code ###
+.vscode/

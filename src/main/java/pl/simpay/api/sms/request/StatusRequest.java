@@ -1,4 +1,4 @@
-package api.sms.service.request;
+package pl.simpay.api.sms.request;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,6 +1,7 @@
-package api.sms.service.response;
+package pl.simpay.api.sms.response;
 
-import api.sms.service.response.domain.SimpayResponse;
+
+import pl.simpay.api.sms.response.domain.SimpayResponse;
 
 import static java.util.Objects.nonNull;
 

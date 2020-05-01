@@ -1,9 +1,9 @@
-package api.sms.service.util;
+package pl.simpay.api.sms.util;
 
-import api.sms.service.request.StatusRequest;
-import api.sms.service.response.domain.SimpayResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import pl.simpay.api.sms.request.StatusRequest;
+import pl.simpay.api.sms.response.domain.SimpayResponse;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;

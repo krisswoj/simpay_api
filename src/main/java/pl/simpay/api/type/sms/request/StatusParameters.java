@@ -21,13 +21,4 @@ public class StatusParameters {
         this.key = SMS_KEY;
         this.secret = SMS_SECRET;
     }
-
-    public StatusParameters() {
-    }
-
-    public String hasedString() {
-
-        String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex("");
-        return null;
-    }
 }

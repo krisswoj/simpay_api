@@ -83,7 +83,7 @@ public class PaymentRequestService {
     }
 
     private void createControlSign(List<NameValuePair> params, String serviceId, String amountValue, String control) {
-        params.add(new BasicNameValuePair("sign", "ca40ea0a9e7abbd59729a4c82c68d1df9baba414b078a294d7e2d0ecc7d9489f"));
+        params.add(new BasicNameValuePair("sign", "52bbe6675fa35c18fe071418349403d3c3d3d41b3d1f6dd2185b7b87ac92fc37"));
     }
 
     private PaymentRequest convertToPaymentRequest(InputStream inputStream) {

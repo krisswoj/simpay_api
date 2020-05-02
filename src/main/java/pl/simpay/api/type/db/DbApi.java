@@ -11,7 +11,7 @@ public class DbApi {
 
     public void getPaymentLink() throws IOException {
         PaymentRequestService paymentRequestService = new PaymentRequestService();
-        PaymentRequest paymentRequest = paymentRequestService.createPaymentRequest("123", "control-value", AmountType.AMOUNT, "1.00");
+        PaymentRequest paymentRequest = paymentRequestService.createPaymentRequest("128", "123", AmountType.AMOUNT, "1.00");
 
         if (PaymentRequestStatus.SUCCESS.getStatus().equals(paymentRequest.getStatus())) {
             System.out.println("Payment link: " + paymentRequest.getLink());

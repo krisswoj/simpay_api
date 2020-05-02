@@ -10,6 +10,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import pl.simpay.api.type.db.domain.PaymentRequest;
+import pl.simpay.api.type.db.type.AmountType;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +25,7 @@ public class PaymentRequestService {
 
     private static final Gson GSON = new GsonBuilder().create();
 
-    public PaymentRequest createPaymentUrl(String serviceId, String control, AmountType amountType, String amountValue) throws IOException {
+    public PaymentRequest createPaymentRequest(String serviceId, String control, AmountType amountType, String amountValue) throws IOException {
 
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(DB_API_URL);
@@ -32,7 +33,7 @@ public class PaymentRequestService {
         httpPost.setEntity(new UrlEncodedFormEntity(params));
         HttpResponse response = client.execute(httpPost);
 
-        return convertToSmsStatusResponse(response.getEntity().getContent());
+        return convertToPaymentRequest(response.getEntity().getContent());
     }
 
     private List<NameValuePair> createParameters(String serviceId, String control, AmountType amountType, String amountValue) {
@@ -82,10 +83,10 @@ public class PaymentRequestService {
     }
 
     private void createControlSign(List<NameValuePair> params, String serviceId, String amountValue, String control) {
-        params.add(new BasicNameValuePair("sign", "1"));
+        params.add(new BasicNameValuePair("sign", "ca40ea0a9e7abbd59729a4c82c68d1df9baba414b078a294d7e2d0ecc7d9489f"));
     }
 
-    private PaymentRequest convertToSmsStatusResponse(InputStream inputStream) {
+    private PaymentRequest convertToPaymentRequest(InputStream inputStream) {
         return GSON.fromJson(new InputStreamReader(inputStream, StandardCharsets.UTF_8), PaymentRequest.class);
     }
 

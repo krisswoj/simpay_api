@@ -1,44 +1,46 @@
 package pl.simpay.api.type.sms;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import pl.simpay.api.type.sms.request.StatusRequest;
+import org.springframework.util.CollectionUtils;
+import pl.simpay.api.type.sms.response.SimpayStatusType;
+import pl.simpay.api.type.sms.response.domain.Error;
 import pl.simpay.api.type.sms.response.domain.SmsStatusResponse;
+import pl.simpay.api.type.sms.service.SmsRequestService;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
-import static pl.simpay.config.ApiParameters.SMS_API_URL;
+import static java.util.Objects.nonNull;
 
 public class SmsApi {
 
-    private static final Gson GSON = new GsonBuilder().create();
+    public void getSmsStatus() throws IOException {
+        SmsRequestService smsRequestService = new SmsRequestService();
+        SmsStatusResponse response = smsRequestService.getResponse("123", "7136", "xxx");
 
-    public SmsStatusResponse getResponse(String serviceId, String number, String code) throws IOException {
-        StatusRequest statusRequest = new StatusRequest(serviceId, number, code);
+        if (nonNull(response)
+                && nonNull(response.getRespond())
+                && nonNull(response.getRespond().getStatus())
+                && SimpayStatusType.OK.name().equals(response.getRespond().getStatus())) {
 
-        CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(SMS_API_URL);
-        httpPost.setHeader("Accept", "application/json");
-        httpPost.setHeader("Content-type", "application/json");
-        httpPost.setEntity(new StringEntity(toJson(statusRequest)));
-        HttpResponse response = client.execute(httpPost);
+            System.out.println("The code is correct");
+        }
 
-        return convertToSmsStatusResponse(response.getEntity().getContent());
+        if (nonNull(response)
+                && nonNull(response.getRespond())
+                && nonNull(response.getRespond().getStatus())
+                && SimpayStatusType.USED.name().equals(response.getRespond().getStatus())) {
+
+            System.out.println("The code has been used");
+        }
+
+        if (nonNull(response)
+                && !CollectionUtils.isEmpty(response.getError())) {
+
+            Error error = response.getError().get(0);
+
+            System.out.println("Error code: " + error.getErrorCode());
+            System.out.println("Error message: " + error.getErrorName());
+            System.out.println("Error value: " + error.getErrorValue());
+        }
     }
 
-    private SmsStatusResponse convertToSmsStatusResponse(InputStream inputStream) {
-        return GSON.fromJson(new InputStreamReader(inputStream, StandardCharsets.UTF_8), SmsStatusResponse.class);
-    }
-
-    private String toJson(StatusRequest statusRequest) {
-        return GSON.toJson(statusRequest);
-    }
 }

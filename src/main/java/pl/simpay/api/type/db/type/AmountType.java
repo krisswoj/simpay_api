@@ -1,4 +1,4 @@
-package pl.simpay.api.type.db.service;
+package pl.simpay.api.type.db.type;
 
 public enum AmountType {
     AMOUNT("amount"),

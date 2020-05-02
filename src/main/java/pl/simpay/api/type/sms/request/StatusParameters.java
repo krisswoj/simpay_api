@@ -1,9 +1,9 @@
-package pl.simpay.api.sms.request;
+package pl.simpay.api.type.sms.request;
 
 import com.google.gson.annotations.SerializedName;
 
-import static pl.simpay.api.config.ApiParameters.PARTNER_KEY;
-import static pl.simpay.api.config.ApiParameters.PARTNER_SECRET;
+import static pl.simpay.config.ApiParameters.SMS_KEY;
+import static pl.simpay.config.ApiParameters.SMS_SECRET;
 
 public class StatusParameters {
 
@@ -18,7 +18,16 @@ public class StatusParameters {
         this.serviceId = serviceId;
         this.number = number;
         this.code = code;
-        this.key = PARTNER_KEY;
-        this.secret = PARTNER_SECRET;
+        this.key = SMS_KEY;
+        this.secret = SMS_SECRET;
+    }
+
+    public StatusParameters() {
+    }
+
+    public String hasedString() {
+
+        String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex("");
+        return null;
     }
 }

@@ -1,11 +1,11 @@
-package pl.simpay.api.sms.response.domain;
+package pl.simpay.api.type.sms.response.domain;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class SimpayResponse {
+public class SmsStatusResponse {
 
     @SerializedName("error")
     @Expose

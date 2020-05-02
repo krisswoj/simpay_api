@@ -1,4 +1,4 @@
-package pl.simpay.api.sms.response;
+package pl.simpay.api.type.sms.response;
 
 public enum SimpayStatusType {
     OK,

@@ -1,4 +1,4 @@
-package pl.simpay.api;
+package pl.simpay;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

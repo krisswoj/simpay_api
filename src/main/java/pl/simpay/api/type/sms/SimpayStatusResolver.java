@@ -1,25 +1,24 @@
-package pl.simpay.api.sms.response;
+package pl.simpay.api.type.sms;
 
-
-import pl.simpay.api.sms.response.domain.SimpayResponse;
+import pl.simpay.api.type.sms.response.SimpayStatusType;
+import pl.simpay.api.type.sms.response.domain.SmsStatusResponse;
 
 import static java.util.Objects.nonNull;
 
-public class SimpayStatusResponse {
-    private SimpayResponse response;
+public class SimpayStatusResolver {
 
-    public SimpayStatusResponse(SimpayResponse response) {
-        this.response = response;
+    private SimpayStatusResolver() {
+        // empty
     }
 
-    public boolean isSuccess() {
+    public static boolean isSuccess(SmsStatusResponse response) {
         return nonNull(response)
                 && nonNull(response.getRespond())
                 && nonNull(response.getRespond().getStatus())
                 && SimpayStatusType.OK.name().equals(response.getRespond().getStatus());
     }
 
-    public boolean isUsed() {
+    public static boolean isUsed(SmsStatusResponse response) {
         return nonNull(response)
                 && nonNull(response.getRespond())
                 && nonNull(response.getRespond().getStatus())

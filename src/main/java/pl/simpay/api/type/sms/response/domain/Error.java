@@ -1,4 +1,4 @@
-package pl.simpay.api.sms.response.domain;
+package pl.simpay.api.type.sms.response.domain;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -3,7 +3,7 @@ package pl.simpay.api.type.db.domain;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DbUrlRequest {
+public class DbPaymentUrl {
 
     @SerializedName("status")
     @Expose

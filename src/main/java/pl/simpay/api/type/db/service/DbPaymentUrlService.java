@@ -1,7 +1,5 @@
 package pl.simpay.api.type.db.service;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -9,34 +7,33 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import pl.simpay.api.type.db.domain.DbUrlRequest;
+import org.springframework.stereotype.Service;
+import pl.simpay.api.type.db.domain.DbPaymentUrl;
 import pl.simpay.api.type.db.type.AmountType;
+import pl.simpay.api.util.Sha256Util;
+import pl.simpay.api.util.GsonUtil;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 import static pl.simpay.config.ApiParameters.DB_API_URL;
 
-public class DbUrlRequestService {
+@Service
+public class DbPaymentUrlService {
 
-    private static final Gson GSON = new GsonBuilder().create();
-
-    public DbUrlRequest createPaymentRequest(String serviceId, String control, AmountType amountType, String amountValue) throws IOException {
+    public DbPaymentUrl createPaymentUrl(String serviceId, String control, AmountType amountType, String amountValue) throws IOException {
 
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(DB_API_URL);
-        List<NameValuePair> params = createParameters(serviceId, control, amountType, amountValue);
+        List<NameValuePair> params = createParams(serviceId, control, amountType, amountValue);
         httpPost.setEntity(new UrlEncodedFormEntity(params));
         HttpResponse response = client.execute(httpPost);
 
-        return convertToPaymentRequest(response.getEntity().getContent());
+        return GsonUtil.convertToDbPaymentUrl(response.getEntity().getContent());
     }
 
-    private List<NameValuePair> createParameters(String serviceId, String control, AmountType amountType, String amountValue) {
+    private List<NameValuePair> createParams(String serviceId, String control, AmountType amountType, String amountValue) {
         List<NameValuePair> params = new ArrayList<>();
 
         //Service ID from Simpay partner panel
@@ -77,17 +74,9 @@ public class DbUrlRequestService {
         //Type: String
         params.add(new BasicNameValuePair("provider", "1"));
 
-        createControlSign(params, serviceId, amountValue, control);
+        Sha256Util.createDbPaymentControlSign(params, serviceId, amountValue, control);
 
         return params;
-    }
-
-    private void createControlSign(List<NameValuePair> params, String serviceId, String amountValue, String control) {
-        params.add(new BasicNameValuePair("sign", "52bbe6675fa35c18fe071418349403d3c3d3d41b3d1f6dd2185b7b87ac92fc37"));
-    }
-
-    private DbUrlRequest convertToPaymentRequest(InputStream inputStream) {
-        return GSON.fromJson(new InputStreamReader(inputStream, StandardCharsets.UTF_8), DbUrlRequest.class);
     }
 
 }

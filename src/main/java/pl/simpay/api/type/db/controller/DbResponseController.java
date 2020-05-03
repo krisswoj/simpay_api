@@ -14,7 +14,7 @@ public class DbResponseController {
     private static final String CONFIRMATION_RESPONSE = "OK";
 
     @PostMapping(value = "/simpay_api")
-    public String getBook(@RequestParam MultiValueMap<String, String> responseData) {
+    public String getResponse(@RequestParam MultiValueMap<String, String> responseData) {
 
         DbPaymentResponse dbPaymentResponse = PaymentResponseBuilder.buildPaymentResponse(responseData);
 

@@ -3,6 +3,7 @@ package pl.simpay.api.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import pl.simpay.api.type.ParametersWrapper;
+import pl.simpay.api.type.db.domain.DbPaymentUrl;
 import pl.simpay.api.type.db.domain.dbmaxtransactionvalue.DbMaxTransactionValueResponse;
 import pl.simpay.api.type.db.domain.dbservicecommission.DbServiceCommissionResponse;
 import pl.simpay.api.type.db.domain.dbservicelist.DbServiceListResponse;
@@ -40,8 +41,13 @@ public class GsonUtil {
     public static DbMaxTransactionValueResponse convertToDbMaxTransactionValueResponse(InputStream inputStream) {
         return convertToObject(inputStream, DbMaxTransactionValueResponse.class);
     }
+
     public static DbServiceCommissionResponse convertToDbServiceCommissionResponse(InputStream inputStream) {
         return convertToObject(inputStream, DbServiceCommissionResponse.class);
+    }
+
+    public static DbPaymentUrl convertToDbPaymentUrl(InputStream inputStream) {
+        return convertToObject(inputStream, DbPaymentUrl.class);
     }
 
     private static <T> T convertToObject(InputStream inputStream, Class<T> tClass) {

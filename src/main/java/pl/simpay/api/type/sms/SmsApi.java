@@ -1,5 +1,6 @@
 package pl.simpay.api.type.sms;
 
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.simpay.api.type.sms.response.SimpayStatusType;
 import pl.simpay.api.type.sms.response.domain.Error;
@@ -10,10 +11,17 @@ import java.io.IOException;
 
 import static java.util.Objects.nonNull;
 
+@Service
 public class SmsApi {
 
+    private SmsRequestService smsRequestService;
+
+    public SmsApi(SmsRequestService smsRequestService) {
+        this.smsRequestService = smsRequestService;
+    }
+
     public void getSmsStatus() throws IOException {
-        SmsRequestService smsRequestService = new SmsRequestService();
+
         SmsStatusResponse response = smsRequestService.getResponse("123", "7136", "xxx");
 
         if (nonNull(response)

@@ -7,6 +7,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.springframework.stereotype.Service;
 import pl.simpay.api.type.ParametersWrapper;
 import pl.simpay.api.type.sms.request.StatusParameters;
 import pl.simpay.api.type.sms.response.domain.SmsStatusResponse;
@@ -16,6 +17,7 @@ import java.io.IOException;
 
 import static pl.simpay.config.ApiParameters.SMS_API_URL;
 
+@Service
 public class SmsRequestService {
 
     private static final Gson GSON = new GsonBuilder().create();

@@ -6,12 +6,13 @@ public class ApiParameters {
         //empty
     }
 
+    public static final String API_KEY = "5a1cad43";
+    public static final String API_SECRET = "bfc4249e1c08fcb65ed71cb9eb56c27e";
+
     /**
      * Kod jednorazowy
      */
 
-    public static final String SMS_KEY = "x";
-    public static final String SMS_SECRET = "x";
     public static final String SMS_API_URL = "https://simpay.pl/api/status";
 
     /**
@@ -20,4 +21,8 @@ public class ApiParameters {
 
     public static final String DB_KEY = "x";
     public static final String DB_API_URL = "https://simpay.pl/db/api";
+    public static final String DB_STATUS_API_URL = "https://simpay.pl/api/db_status";
+    public static final String DB_SERVICES_LIST_URL = "https://simpay.pl/api/get_services_db";
+    public static final String DB_MAX_TRANSACTION_VALUE_URL = "https://simpay.pl/api/db_hosts";
+    public static final String DB_SERVICE_COMMISSION_URL = "https://simpay.pl/api/db_hosts_commission";
 }

@@ -1,23 +1,18 @@
-package pl.simpay.api.type.sms.request;
+package pl.simpay.api.type.db.domain.dbservicecommission;
 
 import com.google.gson.annotations.SerializedName;
 
 import static pl.simpay.config.ApiParameters.API_KEY;
 import static pl.simpay.config.ApiParameters.API_SECRET;
 
-public class StatusParameters {
-
+public class DbServiceCommissionRequest {
     @SerializedName("service_id")
     private String serviceId;
-    private String number;
-    private String code;
     private String key;
     private String secret;
 
-    public StatusParameters(String serviceId, String number, String code) {
+    public DbServiceCommissionRequest(String serviceId) {
         this.serviceId = serviceId;
-        this.number = number;
-        this.code = code;
         this.key = API_KEY;
         this.secret = API_SECRET;
     }

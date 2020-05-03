@@ -9,7 +9,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import pl.simpay.api.type.db.domain.PaymentRequest;
+import pl.simpay.api.type.db.domain.DbUrlRequest;
 import pl.simpay.api.type.db.type.AmountType;
 
 import java.io.IOException;
@@ -21,11 +21,11 @@ import java.util.List;
 
 import static pl.simpay.config.ApiParameters.DB_API_URL;
 
-public class PaymentRequestService {
+public class DbUrlRequestService {
 
     private static final Gson GSON = new GsonBuilder().create();
 
-    public PaymentRequest createPaymentRequest(String serviceId, String control, AmountType amountType, String amountValue) throws IOException {
+    public DbUrlRequest createPaymentRequest(String serviceId, String control, AmountType amountType, String amountValue) throws IOException {
 
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(DB_API_URL);
@@ -86,8 +86,8 @@ public class PaymentRequestService {
         params.add(new BasicNameValuePair("sign", "52bbe6675fa35c18fe071418349403d3c3d3d41b3d1f6dd2185b7b87ac92fc37"));
     }
 
-    private PaymentRequest convertToPaymentRequest(InputStream inputStream) {
-        return GSON.fromJson(new InputStreamReader(inputStream, StandardCharsets.UTF_8), PaymentRequest.class);
+    private DbUrlRequest convertToPaymentRequest(InputStream inputStream) {
+        return GSON.fromJson(new InputStreamReader(inputStream, StandardCharsets.UTF_8), DbUrlRequest.class);
     }
 
 }

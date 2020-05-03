@@ -4,7 +4,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.simpay.api.type.db.domain.PaymentResponse;
+import pl.simpay.api.type.db.domain.DbPaymentResponse;
 import pl.simpay.api.type.db.service.PaymentResponseBuilder;
 import pl.simpay.api.type.db.type.PaymentResponseStatus;
 
@@ -16,17 +16,17 @@ public class DbResponseController {
     @PostMapping(value = "/simpay_api")
     public String getBook(@RequestParam MultiValueMap<String, String> responseData) {
 
-        PaymentResponse paymentResponse = PaymentResponseBuilder.buildPaymentResponse(responseData);
+        DbPaymentResponse dbPaymentResponse = PaymentResponseBuilder.buildPaymentResponse(responseData);
 
-        if (PaymentResponseStatus.ORDER_PAYED.equals(paymentResponse.getStatus())) {
+        if (PaymentResponseStatus.ORDER_PAYED.equals(dbPaymentResponse.getStatus())) {
             System.out.println("Payment has been successfully completed");
         }
 
-        if (PaymentResponseStatus.ORDER_ACCEPTED.equals(paymentResponse.getStatus())) {
+        if (PaymentResponseStatus.ORDER_ACCEPTED.equals(dbPaymentResponse.getStatus())) {
             System.out.println("Order has been accepted - but not paid yet");
         }
 
-        if (PaymentResponseStatus.ORDER_REJECTED.equals(paymentResponse.getStatus())) {
+        if (PaymentResponseStatus.ORDER_REJECTED.equals(dbPaymentResponse.getStatus())) {
             System.out.println("Payment has been rejected");
         }
 

@@ -2,7 +2,7 @@ package pl.simpay.api.type.db.domain;
 
 import pl.simpay.api.type.db.type.PaymentResponseStatus;
 
-public class PaymentResponse {
+public class DbPaymentResponse {
     private String id;
     private PaymentResponseStatus status;
     private String valuenet;
@@ -12,7 +12,7 @@ public class PaymentResponse {
     private String numberFrom;
     private String sign;
 
-    public PaymentResponse(String id, PaymentResponseStatus status, String valuenet, String valuenetGross, String valuePartner, String control, String numberFrom, String sign) {
+    public DbPaymentResponse(String id, PaymentResponseStatus status, String valuenet, String valuenetGross, String valuePartner, String control, String numberFrom, String sign) {
         this.id = id;
         this.status = status;
         this.valuenet = valuenet;

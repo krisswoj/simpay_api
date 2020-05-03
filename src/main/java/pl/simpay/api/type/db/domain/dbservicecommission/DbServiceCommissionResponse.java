@@ -1,23 +1,23 @@
-package pl.simpay.api.type.db.domain.paymentinformation;
+package pl.simpay.api.type.db.domain.dbservicecommission;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PaymentInformation {
+public class DbServiceCommissionResponse {
 
     @SerializedName("respond")
     @Expose
-    private Respond respond;
+    private List<Respond> respond = null;
     @SerializedName("error")
     @Expose
     private List<Object> error = null;
 
-    public Respond getRespond() {
+    public List<Respond> getRespond() {
         return respond;
     }
 
-    public void setRespond(Respond respond) {
+    public void setRespond(List<Respond> respond) {
         this.respond = respond;
     }
 

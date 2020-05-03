@@ -1,7 +1,7 @@
 package pl.simpay.api.type.db.service;
 
 import org.springframework.util.MultiValueMap;
-import pl.simpay.api.type.db.domain.PaymentResponse;
+import pl.simpay.api.type.db.domain.DbPaymentResponse;
 import pl.simpay.api.type.db.type.PaymentResponseStatus;
 
 public class PaymentResponseBuilder {
@@ -10,8 +10,8 @@ public class PaymentResponseBuilder {
         //empty
     }
 
-    public static PaymentResponse buildPaymentResponse(MultiValueMap<String, String> responseData) {
-        return new PaymentResponse(
+    public static DbPaymentResponse buildPaymentResponse(MultiValueMap<String, String> responseData) {
+        return new DbPaymentResponse(
                 responseData.getFirst("id"),
                 PaymentResponseStatus.valueOf(responseData.getFirst("status")),
                 responseData.getFirst("valuenet"),

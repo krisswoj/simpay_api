@@ -7,14 +7,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import pl.simpay.api.type.ParametersWrapper;
 import pl.simpay.api.type.sms.request.StatusParameters;
-import pl.simpay.api.type.ParamsWrapper;
 import pl.simpay.api.type.sms.response.domain.SmsStatusResponse;
+import pl.simpay.api.util.GsonUtil;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
 import static pl.simpay.config.ApiParameters.SMS_API_URL;
 
@@ -23,23 +21,15 @@ public class SmsRequestService {
     private static final Gson GSON = new GsonBuilder().create();
 
     public SmsStatusResponse getResponse(String serviceId, String number, String code) throws IOException {
-        ParamsWrapper params = new ParamsWrapper(new StatusParameters(serviceId, number, code));
+        ParametersWrapper parameters = new ParametersWrapper(new StatusParameters(serviceId, number, code));
 
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(SMS_API_URL);
         httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-type", "application/json");
-        httpPost.setEntity(new StringEntity(toJson(params)));
+        httpPost.setEntity(new StringEntity(GsonUtil.toJson(parameters)));
         HttpResponse response = client.execute(httpPost);
 
-        return convertToSmsStatusResponse(response.getEntity().getContent());
-    }
-
-    private SmsStatusResponse convertToSmsStatusResponse(InputStream inputStream) {
-        return GSON.fromJson(new InputStreamReader(inputStream, StandardCharsets.UTF_8), SmsStatusResponse.class);
-    }
-
-    private String toJson(ParamsWrapper paramsWrapper) {
-        return GSON.toJson(paramsWrapper);
+        return GsonUtil.convertToSmsStatusResponse(response.getEntity().getContent());
     }
 }

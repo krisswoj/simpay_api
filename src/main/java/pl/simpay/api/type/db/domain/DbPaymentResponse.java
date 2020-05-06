@@ -5,18 +5,18 @@ import pl.simpay.api.type.db.type.PaymentResponseStatus;
 public class DbPaymentResponse {
     private String id;
     private PaymentResponseStatus status;
-    private String valuenet;
-    private String valuenetGross;
+    private String valueNet;
+    private String valueNetGross;
     private String valuePartner;
     private String control;
     private String numberFrom;
     private String sign;
 
-    public DbPaymentResponse(String id, PaymentResponseStatus status, String valuenet, String valuenetGross, String valuePartner, String control, String numberFrom, String sign) {
+    public DbPaymentResponse(String id, PaymentResponseStatus status, String valueNet, String valueNetGross, String valuePartner, String control, String numberFrom, String sign) {
         this.id = id;
         this.status = status;
-        this.valuenet = valuenet;
-        this.valuenetGross = valuenetGross;
+        this.valueNet = valueNet;
+        this.valueNetGross = valueNetGross;
         this.valuePartner = valuePartner;
         this.control = control;
         this.numberFrom = numberFrom;
@@ -39,20 +39,20 @@ public class DbPaymentResponse {
         this.status = status;
     }
 
-    public String getValuenet() {
-        return valuenet;
+    public String getValueNet() {
+        return valueNet;
     }
 
-    public void setValuenet(String valuenet) {
-        this.valuenet = valuenet;
+    public void setValueNet(String valueNet) {
+        this.valueNet = valueNet;
     }
 
-    public String getValuenetGross() {
-        return valuenetGross;
+    public String getValueNetGross() {
+        return valueNetGross;
     }
 
-    public void setValuenetGross(String valuenetGross) {
-        this.valuenetGross = valuenetGross;
+    public void setValueNetGross(String valueNetGross) {
+        this.valueNetGross = valueNetGross;
     }
 
     public String getValuePartner() {

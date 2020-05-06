@@ -8,6 +8,8 @@ import pl.simpay.api.type.db.domain.DbPaymentResponse;
 import pl.simpay.api.type.db.service.PaymentResponseBuilder;
 import pl.simpay.api.type.db.type.PaymentResponseStatus;
 
+import static pl.simpay.api.util.Sha256Util.dbPaymentResponseSignIsValid;
+
 @RestController
 public class DbResponseController {
 
@@ -15,18 +17,23 @@ public class DbResponseController {
 
     @PostMapping(value = "/simpay_api")
     public String getResponse(@RequestParam MultiValueMap<String, String> responseData) {
-
         DbPaymentResponse dbPaymentResponse = PaymentResponseBuilder.buildPaymentResponse(responseData);
 
-        if (PaymentResponseStatus.ORDER_PAYED.equals(dbPaymentResponse.getStatus())) {
+        if (dbPaymentResponseSignIsValid(dbPaymentResponse)
+                && PaymentResponseStatus.ORDER_PAYED.equals(dbPaymentResponse.getStatus())) {
+
             System.out.println("Payment has been successfully completed");
         }
 
-        if (PaymentResponseStatus.ORDER_ACCEPTED.equals(dbPaymentResponse.getStatus())) {
+        if (dbPaymentResponseSignIsValid(dbPaymentResponse)
+                && PaymentResponseStatus.ORDER_ACCEPTED.equals(dbPaymentResponse.getStatus())) {
+
             System.out.println("Order has been accepted - but not paid yet");
         }
 
-        if (PaymentResponseStatus.ORDER_REJECTED.equals(dbPaymentResponse.getStatus())) {
+        if (dbPaymentResponseSignIsValid(dbPaymentResponse)
+                && PaymentResponseStatus.ORDER_REJECTED.equals(dbPaymentResponse.getStatus())) {
+
             System.out.println("Payment has been rejected");
         }
 

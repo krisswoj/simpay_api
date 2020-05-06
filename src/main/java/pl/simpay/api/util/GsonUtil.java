@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import pl.simpay.api.type.ParametersWrapper;
 import pl.simpay.api.type.db.domain.DbPaymentUrl;
-import pl.simpay.api.type.db.domain.dbmaxtransactionvalue.DbMaxTransactionValueResponse;
-import pl.simpay.api.type.db.domain.dbservicecommission.DbServiceCommissionResponse;
-import pl.simpay.api.type.db.domain.dbservicelist.DbServiceListResponse;
+import pl.simpay.api.type.db.domain.dbmaxtransactionvalue.DbMaxTransactionValue;
+import pl.simpay.api.type.db.domain.dbservicecommission.DbServiceCommissionRate;
+import pl.simpay.api.type.db.domain.dbservicelist.DbActiveServices;
 import pl.simpay.api.type.db.domain.paymentinformation.PaymentStatusResponse;
 import pl.simpay.api.type.sms.response.domain.SmsStatusResponse;
 
@@ -34,16 +34,16 @@ public class GsonUtil {
         return convertToObject(inputStream, PaymentStatusResponse.class);
     }
 
-    public static DbServiceListResponse convertToDbServiceListResponse(InputStream inputStream) {
-        return convertToObject(inputStream, DbServiceListResponse.class);
+    public static DbActiveServices convertToDbServiceListResponse(InputStream inputStream) {
+        return convertToObject(inputStream, DbActiveServices.class);
     }
 
-    public static DbMaxTransactionValueResponse convertToDbMaxTransactionValueResponse(InputStream inputStream) {
-        return convertToObject(inputStream, DbMaxTransactionValueResponse.class);
+    public static DbMaxTransactionValue convertToDbMaxTransactionValueResponse(InputStream inputStream) {
+        return convertToObject(inputStream, DbMaxTransactionValue.class);
     }
 
-    public static DbServiceCommissionResponse convertToDbServiceCommissionResponse(InputStream inputStream) {
-        return convertToObject(inputStream, DbServiceCommissionResponse.class);
+    public static DbServiceCommissionRate convertToDbServiceCommissionResponse(InputStream inputStream) {
+        return convertToObject(inputStream, DbServiceCommissionRate.class);
     }
 
     public static DbPaymentUrl convertToDbPaymentUrl(InputStream inputStream) {

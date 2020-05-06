@@ -4,7 +4,7 @@ import pl.simpay.api.type.xml.domain.XmlRequest;
 
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static pl.simpay.api.util.Sha256Util.isSignatureValid;
+import static pl.simpay.api.util.Sha256Util.xmlRequestSignIsValid;
 
 public class XmlRequestVerifier {
 
@@ -21,7 +21,7 @@ public class XmlRequestVerifier {
             return XmlRequestStatus.NO_SIGNATURE_PARAMETER;
         }
 
-        if (isBlank(xmlRequest.getSmsId())
+        if (isBlank(xmlRequest.getId())
                 || isBlank(xmlRequest.getSmsFrom())
                 || isBlank(xmlRequest.getSendNumber())
                 || isBlank(xmlRequest.getSmsText())
@@ -29,7 +29,7 @@ public class XmlRequestVerifier {
             return XmlRequestStatus.MISSING_PARAMETERS;
         }
 
-        if (!isSignatureValid(xmlRequest.getSign())) {
+        if (!xmlRequestSignIsValid(xmlRequest)) {
             return XmlRequestStatus.WRONG_SIGNATURE;
         }
 

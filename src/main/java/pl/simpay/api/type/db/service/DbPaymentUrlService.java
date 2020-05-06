@@ -2,16 +2,13 @@ package pl.simpay.api.type.db.service;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.springframework.stereotype.Service;
 import pl.simpay.api.type.db.domain.DbPaymentUrl;
 import pl.simpay.api.type.db.type.AmountType;
-import pl.simpay.api.util.Sha256Util;
 import pl.simpay.api.util.GsonUtil;
+import pl.simpay.api.util.HttpPostService;
+import pl.simpay.api.util.Sha256Util;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,13 +19,15 @@ import static pl.simpay.config.ApiParameters.DB_API_URL;
 @Service
 public class DbPaymentUrlService {
 
-    public DbPaymentUrl createPaymentUrl(String serviceId, String control, AmountType amountType, String amountValue) throws IOException {
+    private HttpPostService httpPostService;
 
-        CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(DB_API_URL);
+    public DbPaymentUrlService(HttpPostService httpPostService) {
+        this.httpPostService = httpPostService;
+    }
+
+    public DbPaymentUrl createPaymentUrl(String serviceId, String control, AmountType amountType, String amountValue) throws IOException {
         List<NameValuePair> params = createParams(serviceId, control, amountType, amountValue);
-        httpPost.setEntity(new UrlEncodedFormEntity(params));
-        HttpResponse response = client.execute(httpPost);
+        HttpResponse response = httpPostService.getResponse(DB_API_URL, params);
 
         return GsonUtil.convertToDbPaymentUrl(response.getEntity().getContent());
     }
@@ -70,11 +69,11 @@ public class DbPaymentUrlService {
         //"2" – Play,
         //"3" – T-Mobile,
         //"4" – Plus GSM
-        //Required: no, by default Simpay will recognize the operator based on the mobile phone number
+        //Required: no, by default Simpay will recognize the operator basing on the mobile phone number
         //Type: String
         params.add(new BasicNameValuePair("provider", "1"));
 
-        Sha256Util.createDbPaymentControlSign(params, serviceId, amountValue, control);
+        Sha256Util.addDbPaymentControlSign(params, serviceId, amountValue, control);
 
         return params;
     }

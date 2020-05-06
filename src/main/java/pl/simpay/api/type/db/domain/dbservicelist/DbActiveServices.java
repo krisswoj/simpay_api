@@ -1,23 +1,24 @@
-package pl.simpay.api.type.db.domain.dbmaxtransactionvalue;
+
+package pl.simpay.api.type.db.domain.dbservicelist;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DbMaxTransactionValueResponse {
+public class DbActiveServices {
 
     @SerializedName("respond")
     @Expose
-    private List<Respond> respond = null;
+    private Respond respond;
     @SerializedName("error")
     @Expose
     private List<Object> error = null;
 
-    public List<Respond> getRespond() {
+    public Respond getRespond() {
         return respond;
     }
 
-    public void setRespond(List<Respond> respond) {
+    public void setRespond(Respond respond) {
         this.respond = respond;
     }
 
